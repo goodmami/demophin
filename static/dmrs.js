@@ -413,7 +413,7 @@ function parseSentence(form) {
 
 function showParseResults(result) {
   var results = d3.select("#parseresults").selectAll(".result")
-      .data(result.RESULTS)
+      .data(result.results)
     .enter().append("div")
       .attr("class", "result");
   dmrs = results.append("div")
@@ -441,10 +441,10 @@ function generateSentences(elem, mrs) {
       if (data) {
         reals.select("p").remove();
         reals.append("ul").selectAll(".realization")
-            .data(data.RESULTS)
+            .data(data.results)
           .enter().append("li")
             .attr("class", "realization")
-            .text(function(d) {return d;});
+            .text(function(d) {return d.surface;});
       } else {
         reals.append("p")
           .text("No realizations found.")

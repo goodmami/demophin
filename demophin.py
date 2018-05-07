@@ -7,7 +7,9 @@ from bottle import (
     abort, error, default_app, redirect, request, route, run, static_file, view
 )
 
-from minidelphin import loads_one, nodes, links, AceParser, AceGenerator
+from delphin.mrs.simplemrs import loads_one
+from delphin.mrs.components import nodes, links
+from delphin.interfaces.ace import AceParser, AceGenerator
 
 app = default_app()
 
@@ -98,8 +100,7 @@ def parse_sentence(grm, sent, n=None):
         result = parser.interact(sent)
     if not result:
         return None
-    result['RESULTS'] = [d3ify_dmrs(res['MRS'])
-                         for res in result['RESULTS']]
+    result['results'] = [d3ify_dmrs(res['mrs']) for res in result.results()]
     return result
 
 
